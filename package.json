@@ -4,7 +4,8 @@
     "description": "Nomad coffee for the challenge in Nomad coders",
     "scripts": {
         "dev": "nodemon --exec ./node_modules/.bin/babel-node server.js",
-        "migrate": "npx prisma migrate dev --name init"
+        "studio": "npx prisma studio",
+        "migrate": "npx prisma migrate dev"
     },
     "repository": {
         "type": "git",
@@ -23,6 +24,7 @@
         "@graphql-tools/schema": "^8.3.1",
         "@prisma/client": "^3.8.1",
         "apollo-server": "^3.6.2",
+        "bcrypt": "^5.0.1",
         "dotenv": "^14.2.0"
     },
     "devDependencies": {
