@@ -10,11 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Coffee {
+
+model User {
   id Int @default(autoincrement()) @id
+  username String @unique
+  email String @unique
   name String
-  price Int
-  currency String?
+  location String?
+  password String
+  avatarURL String?
+  githubUsername String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
