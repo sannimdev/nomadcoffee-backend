@@ -103,5 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-# 과제
+# 기타
 과제/*
+uploads/**
