@@ -4,7 +4,9 @@ import client from '../client';
 export const getUser = async (token) => {
     try {
         const SECRET_KEY = process.env.SECRET_KEY;
-        if (!token) throw new Error('Token is null');
+        if (!token) {
+            return null;
+        }
         const { id: userId } = jwt.verify(token, SECRET_KEY);
         if (userId) {
             const user = await client.user.findUnique({ where: { id: userId } });
@@ -16,7 +18,7 @@ export const getUser = async (token) => {
     }
 };
 
-export const protectUser = (resolver) => {
+export const protectedUser = (resolver) => {
     return (root, args, context, info) => {
         if (!context.loggedInUser) {
             return {

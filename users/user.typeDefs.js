@@ -9,8 +9,12 @@ export default gql`
         location: String
         avatarURL: String
         githubUsername: String
+        followers: [User]
+        following: [User]
+        totalFollowers: Int!
+        totalFollowing: Int!
     }
     type Query {
-        seeProfile(username: String!): User
+        seeProfile(username: String!, followerLastId: Int, followingLastId: Int): User
     }
 `;

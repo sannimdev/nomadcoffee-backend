@@ -2,17 +2,13 @@ import { createWriteStream, existsSync, mkdirSync, unlink } from 'fs';
 import bcrypt from 'bcrypt';
 import { GraphQLUpload } from 'graphql-upload';
 import client from '../../client';
-import { protectUser } from '../users.utils';
+import { protectedUser } from '../users.utils';
 
 export default {
     Upload: GraphQLUpload,
     Mutation: {
-        editProfile: protectUser(
-            async (
-                _,
-                { name, location, password: newPassword, githubUsername, avatar },
-                { loggedInUser }
-            ) => {
+        editProfile: protectedUser(
+            async (_, { name, location, password: newPassword, githubUsername, avatar }, { loggedInUser }) => {
                 try {
                     let avatarURL = loggedInUser.avatarURL || null;
                     if (avatar) {
