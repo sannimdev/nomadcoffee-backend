@@ -10,16 +10,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id Int @default(autoincrement()) @id
-  username String @unique
-  email String @unique
-  name String
-  location String?
-  password String
-  avatarURL String?
+  id             Int      @id @default(autoincrement())
+  username       String   @unique
+  email          String   @unique
+  name           String
+  location       String?
+  password       String
+  avatarURL      String?
   githubUsername String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  followers      User[]   @relation("FollowRelation", references: [id])
+  following      User[]   @relation("FollowRelation", references: [id])
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
