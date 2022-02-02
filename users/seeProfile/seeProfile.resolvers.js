@@ -2,13 +2,13 @@ import client from '../../client';
 
 export default {
     User: {
-        followers: (_ /* { id } */, __, ___, { variableValues: { username, followerLastId } }) =>
-            client.user.findUnique({ where: { username } }).followers({
+        followers: ({ id }, { followerLastId }) =>
+            client.user.findUnique({ where: { id } }).followers({
                 take: 5,
                 skip: !!followerLastId * 1,
                 ...(followerLastId && { cursor: { id: followerLastId } }),
             }),
-        following: ({ id }, __, ___, { variableValues: { followingLastId } }) =>
+        following: ({ id }, { followingLastId }) =>
             client.user.findUnique({ where: { id } }).following({
                 take: 5,
                 skip: !!followingLastId * 1,
