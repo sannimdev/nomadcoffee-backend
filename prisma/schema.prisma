@@ -11,16 +11,51 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
-  username       String   @unique
-  email          String   @unique
-  name           String
-  location       String?
-  password       String
-  avatarURL      String?
-  githubUsername String?
-  followers      User[]   @relation("FollowRelation", references: [id])
-  following      User[]   @relation("FollowRelation", references: [id])
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  id               Int               @id @default(autoincrement())
+  username         String            @unique
+  email            String            @unique
+  name             String
+  location         String?
+  password         String
+  avatarURL        String?
+  githubUsername   String?
+  followers        User[]            @relation("FollowRelation", references: [id])
+  following        User[]            @relation("FollowRelation", references: [id])
+  coffeeShops      CoffeeShop[]
+  coffeeShopPhotos CoffeeShopPhoto[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+}
+
+model CoffeeShop {
+  id        Int               @id @default(autoincrement())
+  name      String
+  category  Category[]
+  latitude  String?
+  longitude String?
+  user      User              @relation(fields: [userId], references: [id])
+  userId    Int
+  photos    CoffeeShopPhoto[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model CoffeeShopPhoto {
+  id        Int          @id @default(autoincrement())
+  shop      CoffeeShop[]
+  user      User         @relation(fields: [userId], references: [id])
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  shopId    Int
+  userId    Int
+}
+
+// Like Hashtag
+model Category {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  slug        String?
+  coffeeShops CoffeeShop[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
