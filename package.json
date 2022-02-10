@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Nomad coffee for the challenge in Nomad coders",
     "scripts": {
-        "dev": "nodemon --exec ./node_modules/.bin/babel-node server.js",
+        "dev": "nodemon --exec ./node_modules/.bin/babel-node src/server.js",
         "migrate": "npx prisma migrate dev",
         "build": "babel src --out-dir build",
         "studio": "npx prisma studio",
