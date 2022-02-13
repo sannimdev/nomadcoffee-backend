@@ -1,10 +1,6 @@
 import { gql } from 'apollo-server';
 
 export default gql`
-    type CreateUserResult {
-        ok: Boolean!
-        error: String
-    }
     type Mutation {
         createUser(
             username: String!
@@ -14,6 +10,6 @@ export default gql`
             password: String!
             avatarURL: String
             githubUsername: String
-        ): CreateUserResult
+        ): MutationResponse!
     }
 `;
