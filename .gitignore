@@ -106,3 +106,4 @@ dist
 # 기타
 과제/*
 uploads/**
+build/**
