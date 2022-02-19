@@ -21,6 +21,11 @@ export const getUser = async (token) => {
 export const protectedUser = (resolver) => {
     return (root, args, context, info) => {
         if (!context.loggedInUser) {
+            const query = info.operation.operation === 'query';
+            if (query) {
+                // return type이 Mutation과 다름.
+                return null;
+            }
             return {
                 ok: false,
                 error: 'Please log in to perform this action.',
