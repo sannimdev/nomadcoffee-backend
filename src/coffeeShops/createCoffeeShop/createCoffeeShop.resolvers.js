@@ -6,7 +6,7 @@ export default {
     Mutation: {
         createCoffeeShop: protectedUser(async (_, { name, category, latitude, longitude }, { loggedInUser }) => {
             const connectOrCreate = getCategories(category);
-            await client.coffeeShop.create({
+            const newCoffeeShop = await client.coffeeShop.create({
                 data: {
                     name,
                     latitude,
@@ -16,9 +16,11 @@ export default {
                     },
                     ...(connectOrCreate.length && { category: { connectOrCreate } }),
                 },
+                select: { id: true },
             });
             return {
                 ok: true,
+                id: newCoffeeShop.id,
             };
         }),
     },
