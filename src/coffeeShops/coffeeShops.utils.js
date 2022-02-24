@@ -1,5 +1,5 @@
 export const getPagination = (page = 1) => {
-    const take = 25;
+    const take = 5;
     return {
         take,
         skip: (page - 1) * take,
