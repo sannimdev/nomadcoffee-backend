@@ -14,7 +14,6 @@ export default {
             }
             const oldCoffeeCategories = oldCoffeeShop.category.map(({ id }) => ({ id }));
             const connectOrCreate = getCategories(category);
-            console.log(oldCoffeeCategories);
             await client.coffeeShop.update({
                 where: { id },
                 data: {
