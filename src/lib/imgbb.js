@@ -20,7 +20,6 @@ export const uploadPhoto = async (photo) => {
             data: { data, status, success },
         } = await axios(config);
         if (!success || status !== 200) {
-            console.log(data);
             throw new Error(data);
         }
         return data; // 썸네일은 나중에 작업하기
