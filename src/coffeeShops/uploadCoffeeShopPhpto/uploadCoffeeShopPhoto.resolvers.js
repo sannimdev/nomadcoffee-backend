@@ -9,8 +9,7 @@ export default {
         uploadCoffeeShopPhoto: protectedUser(async (_, { photo, shopId }, { loggedInUser }) => {
             try {
                 const { image, thumb, medium } = await uploadPhoto(await photo);
-
-                await client.coffeeShopPhoto.create({
+                const result = await client.coffeeShopPhoto.create({
                     data: {
                         url: image.url,
                         thumbnail: thumb?.url,
@@ -19,11 +18,11 @@ export default {
                         coffeeShop: { connect: { id: shopId } },
                     },
                 });
-
-                return { ok: true };
+                console.log(result);
+                return result;
             } catch (error) {
                 console.error('uploadCoffeeShopPhoto', error);
-                return { ok: false, error: 'The Image have been failed.' };
+                throw new Error(error);
             }
         }),
     },
